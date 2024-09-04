@@ -15,6 +15,7 @@ private:
 
     void deleteUser(const string& id);                                  // 유저 삭제함수
     void changeEmail(const string& id, const string& newEmail);         // 이메일 변경 함수
+    void showUsers();                                                   // 유저 목록 화면 출력 함수
 };
 
 #endif

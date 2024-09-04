@@ -1,7 +1,8 @@
 ﻿#ifndef PARKINGLOTMANAGER_H
 #define PARKINGLOTMANAGER_H
-
+#include "ParkingLotManager.h"
 #include "ParkingLot.h"
+#include "ParkingLotService.h"
 #include <string>
 
 using namespace std;
@@ -9,6 +10,7 @@ using namespace std;
 class ParkingLotManager {
 private:
     ParkingLot parkingLot;
+    ParkingLotService parkingLotService;
     string filePath;
     string userId;
 

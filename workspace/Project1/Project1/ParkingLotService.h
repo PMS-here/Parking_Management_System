@@ -1,5 +1,6 @@
 // parkinglotService.h
-
+#ifndef PARKINGLOTSERVICE_H
+#define PARKINGLOTSERVICE_H
 
 #include <iostream>
 #include <string>
@@ -7,6 +8,7 @@
 #include <sstream>
 #include <vector>
 #include <ctime>
+#include <regex>
 #include "Vehicle.h"
 
 using namespace std;
@@ -15,16 +17,38 @@ class ParkingLotService {
 
 public:
     string userId;
+    Vehicle** map;
     int rows, cols;
     int targetX, targetY;
     double fee;
     string vehicleFilePath;
-    Vehicle** map;
+
     ParkingLotService();
     ParkingLotService(int rows, int cols);
     ParkingLotService(const string& filePath, const string& userId);
     ~ParkingLotService();
-    void initializeParkingLot(int x,int y);
+    
+    // 최초 주차장 초기화 함수
+    void initializeParkingLot(int aa, int bb);
+    
+    // 배열 단위로 주차장 초기화 함수
+    void userinitializeParkingLot(int aa, int bb);
+
+    // 특정 좌표 주차
+    void initializeAtPosition(int tx, int ty, int aa, int bb);
+
+    // 특정 좌표 출차
+    void removeVehicleAtPosition(int tx, int ty,int rate);
+
+    // BFS
+    int BFS(int** a, int x, int y, int tx, int ty);
+
+    // 정규 표현식
+    bool isValidLicensePlate(const string& plate);
+
+    Vehicle getVehicle(int i, int j);
+    void setVehicle(int i, int j, const Vehicle& vehicle);
+
     void enterVehicle(const Vehicle& vehicle);
     void exitVehicle(const string& licensePlate);
     vector<Vehicle> readVehicle() const;
@@ -65,3 +89,4 @@ public:
     void setVehicleFilePath(const string & vehicleFilePath);
     
 };
+#endif // PARKINGLOTSERVICE_H

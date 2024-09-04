@@ -1,19 +1,14 @@
 #include "Vehicle.h"
 #include <ctime>
 using namespace std;
-Vehicle::Vehicle()
-{
-    this->licensePlate = licensePlate;
-    this->model = model;
-    this->parkingTime = parkingTime;
-}
+Vehicle::Vehicle():licensePlate(""), model(""), parkingTime(0.0) {}
 
 Vehicle::Vehicle(string licensePlate, string model,double time)
     : licensePlate(licensePlate), model(model), parkingTime(time) {}
 
 bool Vehicle::isEmpty()
 {
-    return licensePlate.empty() && model.empty();
+    return licensePlate.empty() && model.empty() && parkingTime == 0.0;
 }
 
 std::string Vehicle::getLicensePlate(){
@@ -28,6 +23,9 @@ double Vehicle::getParkedTime()
 {
     return parkingTime;
 }
+void Vehicle::setParkingTime(double parkingTime) {
+    this->parkingTime = parkingTime;
+}
 
 /*
 int Vehicle::getParkedHours() {
@@ -36,6 +34,3 @@ int Vehicle::getParkedHours() {
 }
 */
 
-void Vehicle::setParkingTime(double parkingTime) {
-    this->parkingTime = parkingTime;
-}

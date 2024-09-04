@@ -86,7 +86,7 @@ void LoginService::registerUser()
     User newUser;
 
     printBorder();
-    setColor(11); // Cyan
+     ; // Cyan
     cout << "|             User Registration            |\n";
     printBorder();
 
@@ -119,7 +119,7 @@ bool LoginService::loginUser()
     string id, password;
 
     printBorder();
-    setColor(11); // Cyan
+     ; // Cyan
     cout << "|                 User Login               |\n";
     printBorder();
 
@@ -170,7 +170,7 @@ void LoginService::findPassword()
     string id, email;
 
     printBorder();
-    setColor(11); // Cyan
+     ; // Cyan
     cout << "|              Find Password               |\n";
     printBorder();
 
@@ -203,7 +203,7 @@ void LoginService::run()
     while (true)
     {
         printBorder();
-        setColor(11); // Cyan
+         ; // Cyan
         cout << "|                Main Menu                 |\n";
         printBorder();
 
