@@ -195,7 +195,7 @@ void ParkingLotManager::showMenu() {
                 }
             }
             cout << "T : Target, X : Occupied, N : NON" << '\n';
-            cout << "TARGET DIST" << '\n';
+            
             cout << parkingLotService.BFS(path,NN,MM,TX,TY) << '\n';
         }
         else if (choice == 9) {

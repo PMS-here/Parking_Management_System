@@ -478,7 +478,7 @@ int ParkingLotService::BFS(int** a, int x, int y, int tx, int ty)
         if (curX == tx && curY == ty) {
             for (int i = 0; i < x; i++) {
                 for (int j = 0; j < y; j++) {
-                    if (dist[i][j] == dist[curX][curY]){
+                    if (dist[i][j] == dist[curX][curY] && a[i][j] == 0 ){
                         board.push_back({ i,j });
                     }
                     if (i == tx && j == ty) cout << "T ";
@@ -498,6 +498,10 @@ int ParkingLotService::BFS(int** a, int x, int y, int tx, int ty)
                 }
                 cout << '\n';
             }
+            else {
+                cout << "\nPARKING AVAILABLE\n";
+            }
+            cout << "TARGET DIST: ";
             return dist[curX][curY];
         }
 
