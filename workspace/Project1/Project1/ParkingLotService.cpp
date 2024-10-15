@@ -13,7 +13,7 @@
 using namespace std;
 
 ParkingLotService::ParkingLotService()
-    : userId(""), rows(10), cols(10), targetX(0), targetY(0), fee(0.0), vehicleFilePath("") {
+    : userId(""), rows(10), cols(10), targetX(0), targetY(0), fee(50.0), vehicleFilePath("") {
     // map의 동적 메모리 할당 (10x10)
     map = new Vehicle * [rows];
     for (int i = 0; i < rows; ++i) {
@@ -90,13 +90,12 @@ void ParkingLotService::userinitializeParkingLot(int aa, int bb)
                 cout << "Vehicle license plate (input if none): ";
                 cin.ignore();
                 getline(cin, licensePlate);
-                
-                /* 정규 표현식 오류
+                /*
                 while (true) {
                     cout << "Vehicle license plate (input if none): ";
                     cin.ignore();
                     getline(cin, licensePlate);
-
+                    cout << licensePlate <<'\n';
                     if (isValidLicensePlate(licensePlate)) {
                         cout << "Valid license plate entered: " << licensePlate << endl;
                         break; // 유효한 번호판이면 루프 종료
@@ -365,13 +364,13 @@ void ParkingLotService::initializeAtPosition(int tx, int ty, int aa, int bb)
         string licensePlate, model;
         double parkingTime;
 
-        cout << "(" << tx << ", " << ty << ")The vehicle is coming in!" << endl;
+        cout << "(" << tx << ", " << ty << ") The vehicle is coming in!" << endl;
 
         cout << "Vehicle License Plate: ";
         cin.ignore();
         getline(cin, licensePlate);
 
-        /* 정규표현식 오류
+        /*//정규표현식 오류
         while (true) {
             cout << "Vehicle License Plate: ";
             cin.ignore();
@@ -386,6 +385,7 @@ void ParkingLotService::initializeAtPosition(int tx, int ty, int aa, int bb)
             }
         }
         */
+
         if (licensePlate.empty()) licensePlate = "";
         cout << "Vehicle Model: ";
         getline(cin, model);
@@ -445,7 +445,7 @@ void ParkingLotService::removeVehicleAtPosition(int tx, int ty,int rate=5000)
 
     // 요금 및 삭제 메시지 출력
     cout << "Vehicle License Plate: " << vehicle.getLicensePlate() << " EXIT" << endl;
-    cout << "Parking fee : " << parkingFee << " Won" << endl;
+    cout << "Parking fee : $" << parkingFee  << endl;
     cout << "Goodbye!" << endl;
 }
 
@@ -465,7 +465,7 @@ int ParkingLotService::BFS(int** a, int x, int y, int tx, int ty)
     int dx[] = { 0, 0, 1, -1 };
     int dy[] = { 1, -1, 0, 0 };
     vector<vector<int>> dist(x, vector<int>(y, INF));
-
+    vector<pair<int, int>>board;
     queue<pair<int, int>> q;
     q.push({ 0, 0 });
     dist[0][0] = 0;
@@ -478,6 +478,9 @@ int ParkingLotService::BFS(int** a, int x, int y, int tx, int ty)
         if (curX == tx && curY == ty) {
             for (int i = 0; i < x; i++) {
                 for (int j = 0; j < y; j++) {
+                    if (dist[i][j] == dist[curX][curY] && a[i][j] == 0 ){
+                        board.push_back({ i,j });
+                    }
                     if (i == tx && j == ty) cout << "T ";
                     else if (dist[i][j] == INF) cout << "N ";
                     else if (a[i][j] == 0) {
@@ -487,6 +490,18 @@ int ParkingLotService::BFS(int** a, int x, int y, int tx, int ty)
                 }
                 cout << '\n';
             }
+            if (a[tx][ty] == 1) {
+                cout << "Already occupied!\n";
+                cout << "Recommend different coordinates of the same distance\n";
+                for (int i = 0; i < board.size(); i++) {
+                    cout << i+1 << " : (" << board[i].first << "," << board[i].second <<  ")\n";
+                }
+                cout << '\n';
+            }
+            else {
+                cout << "\nPARKING AVAILABLE\n";
+            }
+            cout << "TARGET DIST: ";
             return dist[curX][curY];
         }
 
@@ -507,7 +522,7 @@ int ParkingLotService::BFS(int** a, int x, int y, int tx, int ty)
 // 정규 표현식 체크 하는 함수 
 bool ParkingLotService::isValidLicensePlate(const string& plate)
 {
-    regex pattern(R"(^\d{2}[A-Z]\d{4}$)");
+    regex pattern(R"(^[0-9]{2}[A-Z][0-9]{4}$)");
     return regex_match(plate, pattern);
 }
 

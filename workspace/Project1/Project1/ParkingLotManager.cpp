@@ -115,7 +115,7 @@ void ParkingLotManager::setParkingLotTarget() {
     cin >> targety;
     TY = targety;
     parkingLot.setTargetY(targety);
-    cout << "Parking lot target set to " << targetx << "x" << targety << " spots.\n";
+    cout << "Parking lot target set to " << targetx << " x " << targety << " spots.\n";
     saveData();  // 데이터 변경 시 저장
 }
 
@@ -139,11 +139,11 @@ void ParkingLotManager::showMenu() {
         cout << "1. Show Status\n";
         cout << "2. Set Parking Lot Size\n";
         cout << "3. Set Parking Target\n";
-        cout << "4. Initializing multiple user inputs\n";
-        cout << "5. Initializing target location\n";
-        cout << "6. EXIT ans Calculate Fee\n";
+        cout << "4. Initialize Inputs\n";
+        cout << "5. Enter at target\n";
+        cout << "6. EXIT and Payment at target\n";
         cout << "7. Set Parking Fee\n";
-        cout << "8. BFS\n";
+        cout << "8. Parking Spot Recommendation (BFS)\n";
         cout << "9. Logout\n";
         cout << "Choose an option: ";
         cin >> choice;
@@ -195,7 +195,7 @@ void ParkingLotManager::showMenu() {
                 }
             }
             cout << "T : Target, X : Occupied, N : NON" << '\n';
-            cout << "TARGET DIST" << '\n';
+            
             cout << parkingLotService.BFS(path,NN,MM,TX,TY) << '\n';
         }
         else if (choice == 9) {
