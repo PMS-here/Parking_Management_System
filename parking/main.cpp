@@ -7,3 +7,17 @@ int main() {
     userManager.run();
     return 0;
 }
+/*
+run -> 
+
+1. register User()
+
+2. loginUser()
+
+
+
+
+
+
+
+*/
