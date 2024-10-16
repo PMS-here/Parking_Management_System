@@ -87,13 +87,13 @@ void ParkingLotService::userinitializeParkingLot(int aa, int bb)
 
                 cout << "(" << i << "," << j << ") INPUT vehicle information." << endl;
 
-                cout << "Vehicle license plate (input if none): ";
+                //cout << "Vehicle license plate (input if none): ";
                 cin.ignore();
-                getline(cin, licensePlate);
-                /*
+                //getline(cin, licensePlate);
+                
                 while (true) {
                     cout << "Vehicle license plate (input if none): ";
-                    cin.ignore();
+                    cin.clear();
                     getline(cin, licensePlate);
                     cout << licensePlate <<'\n';
                     if (isValidLicensePlate(licensePlate)) {
@@ -104,17 +104,19 @@ void ParkingLotService::userinitializeParkingLot(int aa, int bb)
                         cout << "Invalid license plate format. Please enter in the format '00[A-Z]0000'." << endl;
                     }
                 }
-                */
+                
 
                 if (licensePlate.empty()) licensePlate = "";
                 cout << "Vehicle model (input if none): ";
                 //cin.ignore();
+                cin.clear();
                 getline(cin, model);
                 if (model.empty()) model = "";
 
                 cout << "Parked time (set to 0.0 if none): ";
                 string parkingTimeInput;
                 //cin.ignore();
+                cin.clear();
                 getline(cin, parkingTimeInput);
                 if (parkingTimeInput.empty()) parkingTime = 0.0;
                 else {
@@ -315,6 +317,7 @@ void ParkingLotService::gotoxy(int x, int y) {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
+// 방향키로 이동하여 해당 좌표의 주차장 정보를 확인하는 함수
 void ParkingLotService::showParkingLotService() {
     int currentRow = 0, currentCol = 0;
 
@@ -364,27 +367,25 @@ void ParkingLotService::initializeAtPosition(int tx, int ty, int aa, int bb)
         string licensePlate, model;
         double parkingTime;
 
-        cout << "(" << tx << ", " << ty << ") The vehicle is coming in!" << endl;
+        cout << "(" << tx << ", " << ty << ") The vehicle is coming in!\n";
 
-        cout << "Vehicle License Plate: ";
+        // 버퍼 씹히는 문제 해결을 위해 사용
         cin.ignore();
-        getline(cin, licensePlate);
-
-        /*//정규표현식 오류
+        
         while (true) {
             cout << "Vehicle License Plate: ";
-            cin.ignore();
-            getline(cin, licensePlate);
-
+            cin.clear();  // 입력 상태 플래그를 리셋
+            getline(cin, licensePlate);  // 번호판을 입력받음
             if (isValidLicensePlate(licensePlate)) {
                 cout << "Valid license plate entered: " << licensePlate << endl;
                 break; // 유효한 번호판이면 루프 종료
             }
             else {
+                cout << licensePlate << endl;
                 cout << "Invalid license plate format. Please enter in the format '00[A-Z]0000'." << endl;
             }
         }
-        */
+        
 
         if (licensePlate.empty()) licensePlate = "";
         cout << "Vehicle Model: ";
